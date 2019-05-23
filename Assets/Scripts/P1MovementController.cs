@@ -42,11 +42,7 @@ public class P1MovementController : MonoBehaviour
     //Methods
     void FixedUpdate()
     {
-<<<<<<< HEAD
          
-=======
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround); 
->>>>>>> parent of 4fbdd9a... Attack
 
         moveInput = Input.GetAxisRaw("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(moveInput));
