@@ -4,21 +4,6 @@ using UnityEngine;
 
 public class P1Movement : MonoBehaviour
 {
-<<<<<<< HEAD
-    public CharacterController2D controller;
-    float horizontalMove = 0f;
-    public float runSpeed = 40f;
-  
-    // Update is called once per frame
-    void Update()
-    {
-        horizontalMove = Input.GetAxisRaw("Horizontal");
-    }
-
-    private void FixedUpdate()
-    {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
-=======
     //Variables
     public float movementSpeed;
     public float jumpForce;
@@ -33,8 +18,7 @@ public class P1Movement : MonoBehaviour
     private int extraJumps;
     public int extraJumpsValue;
     private Rigidbody2D rb;
-
-
+  
 
     void Start()
     {
@@ -83,6 +67,6 @@ public class P1Movement : MonoBehaviour
         Scaler.x *= -1;
         transform.localScale = Scaler;
 
->>>>>>> 7a6c7c382f465215f5e387abf8d0dd4fa39832da
+
     }
 }
