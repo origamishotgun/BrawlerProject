@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class P1Movement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    public CharacterController2D controller;
+    float horizontalMove = 0f;
+    public float runSpeed = 40f;
+  
     // Update is called once per frame
     void Update()
     {
-        
+        horizontalMove = Input.GetAxisRaw("Horizontal");
+    }
+
+    private void FixedUpdate()
+    {
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
     }
 }
