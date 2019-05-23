@@ -355,6 +355,8 @@ GameObject:
   - component: {fileID: 1755728887}
   - component: {fileID: 1755728886}
   - component: {fileID: 1755728885}
+  - component: {fileID: 1755728890}
+  - component: {fileID: 1755728891}
   m_Layer: 0
   m_Name: P1 PlaceHolder
   m_TagString: Untagged
@@ -379,14 +381,35 @@ MonoBehaviour:
   moveInput: 0
   groundCheck: {fileID: 1800480250}
 <<<<<<< HEAD
+<<<<<<< HEAD
   checkRadius: 1
 =======
   checkRadius: 0.1
 >>>>>>> b2e2d2ab9ec18df5913ae5707797e44ef30fb1ac
+=======
+  checkRadius: 0.5
+>>>>>>> parent of 4fbdd9a... Attack
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   extraJumpsValue: 1
+  animator: {fileID: 1755728890}
+  onLandEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1755728891}
+        m_MethodName: onLanding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1755728886
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -429,7 +452,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 01ca72fd75243a34b981b8b2a2a62357, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -498,7 +521,10 @@ Transform:
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 4fbdd9a... Attack
 --- !u!95 &1755728890
 Animator:
   serializedVersion: 3
@@ -531,8 +557,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1755728885}
+<<<<<<< HEAD
   animator: {fileID: 1755728890}
 >>>>>>> b2e2d2ab9ec18df5913ae5707797e44ef30fb1ac
+=======
+  animator: {fileID: 0}
+>>>>>>> parent of 4fbdd9a... Attack
 --- !u!1 &1800480249
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,8 +667,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056104443}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.22, y: -0.664, z: -1}
-  m_LocalScale: {x: 0.52373, y: 0.5760289, z: 1}
+  m_LocalPosition: {x: 6.84, y: -0.664, z: -1}
+  m_LocalScale: {x: 0.6350226, y: 0.5760289, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -760,6 +790,7 @@ GameObject:
   - component: {fileID: 2082810913}
   - component: {fileID: 2082810916}
   - component: {fileID: 2082810915}
+  - component: {fileID: 2082810917}
   m_Layer: 8
   m_Name: platform big
   m_TagString: Untagged
@@ -825,11 +856,15 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
 <<<<<<< HEAD
   m_LocalPosition: {x: -3.204, y: -0.685, z: 0}
+<<<<<<< HEAD
   m_LocalScale: {x: 0.40957248, y: 0.4978485, z: 1}
 =======
   m_LocalPosition: {x: -3.204, y: -0.685, z: -1}
   m_LocalScale: {x: 0.51708525, y: 0.4978485, z: 1}
 >>>>>>> b2e2d2ab9ec18df5913ae5707797e44ef30fb1ac
+=======
+  m_LocalScale: {x: 0.51708525, y: 0.4978485, z: 1}
+>>>>>>> parent of 4fbdd9a... Attack
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -886,3 +921,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.657299, y: 8.157175}
   m_EdgeRadius: 0
+--- !u!95 &2082810917
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082810912}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e696e789ca09df44196a240c25c84d7c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
