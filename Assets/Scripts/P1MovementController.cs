@@ -22,6 +22,7 @@ public class P1MovementController : MonoBehaviour
     private Rigidbody2D rb;
     public Animator animator;
     public UnityEvent onLandEvent;
+    
 
     private void Awake()
     {
@@ -37,6 +38,8 @@ public class P1MovementController : MonoBehaviour
     {
         extraJumps = extraJumpsValue;
         rb = GetComponent<Rigidbody2D>();
+
+        
     }
 
     //Methods
@@ -92,6 +95,7 @@ public class P1MovementController : MonoBehaviour
             
 
         }
+  
     }
 
 
@@ -104,6 +108,7 @@ public class P1MovementController : MonoBehaviour
 
 
     }
+  
 
     
 }
