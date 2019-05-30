@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class P2MovementController : MonoBehaviour
 {
     //Variables
+    //move + jump
     public float movementSpeed;
     public float jumpForce;
     public float moveInput;
@@ -19,6 +20,7 @@ public class P2MovementController : MonoBehaviour
     private int extraJumps;
     public int extraJumpsValue;
 
+    //Animation
     private Rigidbody2D rb;
     public Animator animator;
     public UnityEvent onLandEvent;
@@ -28,12 +30,10 @@ public class P2MovementController : MonoBehaviour
     public Transform attackPos;
     public float attackRange;
     public LayerMask whatIsEnemies;
-    public int damage;
-    public int health;
-    private float knockBackStr = 1;
+    public float damage;
+    public float health;
+    private float knockBackStr = 10;
 
-    private float dazedTime;
-    public float startDazedTime;
 
     private void Awake()
     {
@@ -48,10 +48,9 @@ public class P2MovementController : MonoBehaviour
         extraJumps = extraJumpsValue;
         rb = GetComponent<Rigidbody2D>();
     }
-
-
     void Update()
     {
+        //check if player touching ground 
         if (isGrounded == true)
         {
             extraJumps = extraJumpsValue;
@@ -69,22 +68,14 @@ public class P2MovementController : MonoBehaviour
 
         }
 
-        if(dazedTime <= 0)
-        {
-            movementSpeed = 5;
-        }
-        else
-        {
-            movementSpeed = 0;
-            dazedTime -= Time.deltaTime;
-        }
-
         handleInput();
+
     }
 
     //Methods
     void FixedUpdate()
     {
+
         moveInput = Input.GetAxisRaw("Horizontal_P2");
 
         if (!this.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
@@ -93,6 +84,7 @@ public class P2MovementController : MonoBehaviour
             animator.SetFloat("Speed", Mathf.Abs(moveInput));
 
         }
+
         if (facingRight == false && moveInput > 0)
         {
             Flip();
@@ -120,6 +112,7 @@ public class P2MovementController : MonoBehaviour
         handleAttacks();
 
         resetValues();
+
     }
 
 
@@ -144,10 +137,8 @@ public class P2MovementController : MonoBehaviour
             {
                 enemiesToDamage[i].GetComponent<P1MovementController>().TakeDamage(damage);
 
-
             }
         }
-
     }
 
 
@@ -174,11 +165,16 @@ public class P2MovementController : MonoBehaviour
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
 
     }
-    public void TakeDamage(int damage)
+
+    public void TakeDamage(float damage)
     {
-        dazedTime = startDazedTime;
+
         health += damage;
+        rb.velocity = Vector2.right * health * knockBackStr;
+
         Debug.Log("damage taken !");
     }
- 
+
+
+
 }

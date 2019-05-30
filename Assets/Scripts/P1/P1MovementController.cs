@@ -30,9 +30,9 @@ public class P1MovementController : MonoBehaviour
     public Transform attackPos;
     public float attackRange;
     public LayerMask whatIsEnemies;
-    public int damage;
-    public int health;
-    private float knockBackStr = 1;
+    public float damage;
+    public float health;
+    private float knockBackStr = 10;
 
 
     private void Awake()
@@ -136,11 +136,9 @@ public class P1MovementController : MonoBehaviour
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<P2MovementController>().TakeDamage(damage);
-       
 
             }
-        }
-        
+        }    
     } 
     
 
@@ -148,8 +146,7 @@ public class P1MovementController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1_P1"))
         {
-            attack = true;
-            
+            attack = true;            
         }
     }
     
@@ -169,11 +166,15 @@ public class P1MovementController : MonoBehaviour
 
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
+
         health += damage;
+        rb.velocity = Vector2.right * health * knockBackStr;
+
         Debug.Log("damage taken !");
     }
 
 
-} 
+
+}
