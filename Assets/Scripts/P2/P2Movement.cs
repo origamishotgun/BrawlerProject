@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P1Movement : MonoBehaviour
+public class P2Movement : MonoBehaviour
 {
-    public P1MovementController controller;
-    public Animator animator; 
+    public P2MovementController controller;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
-     void Update()
+    void Update()
     {
-        
+
     }
 
     public void onLanding()
