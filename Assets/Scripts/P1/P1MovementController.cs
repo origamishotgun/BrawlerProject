@@ -32,7 +32,7 @@ public class P1MovementController : MonoBehaviour
     public LayerMask whatIsEnemies;
     public float damage;
     public float health;
-    private float knockBackStr = 10;
+    private float knockBackStr = 1;
 
 
     private void Awake()
@@ -55,13 +55,14 @@ public class P1MovementController : MonoBehaviour
         {
             extraJumps = extraJumpsValue;
         }
-        if (Input.GetKeyDown(KeyCode.W) && extraJumps > 0)
+        if (Input.GetButtonDown("Vertical_P1") && extraJumps > 0)
         {
             rb.velocity = Vector2.up * jumpForce;
             extraJumps--;
             animator.SetBool("isJumping", true);
         }
-        else if (Input.GetKeyDown(KeyCode.W) && extraJumps == 0 && isGrounded == true)
+        else if (Input.GetButtonDown("Vertical_P1") && extraJumps == 0 && isGrounded == true)
+           
         {
             rb.velocity = Vector2.up * jumpForce;
 
@@ -170,7 +171,7 @@ public class P1MovementController : MonoBehaviour
     {
 
         health += damage;
-        rb.velocity = Vector2.right * health * knockBackStr;
+        rb.velocity = Vector2.up * health * knockBackStr;
 
         Debug.Log("damage taken !");
     }

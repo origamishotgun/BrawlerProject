@@ -32,7 +32,7 @@ public class P2MovementController : MonoBehaviour
     public LayerMask whatIsEnemies;
     public float damage;
     public float health;
-    private float knockBackStr = 10;
+    private float knockBackStr = 1;
 
 
     private void Awake()
@@ -170,7 +170,7 @@ public class P2MovementController : MonoBehaviour
     {
 
         health += damage;
-        rb.velocity = Vector2.right * health * knockBackStr;
+        rb.velocity = Vector2.up * health * knockBackStr;
 
         Debug.Log("damage taken !");
     }
