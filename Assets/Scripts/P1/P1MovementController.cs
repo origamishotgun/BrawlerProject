@@ -137,8 +137,12 @@ public class P1MovementController : MonoBehaviour
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<P2MovementController>().TakeDamage(damage);
+                
+               
+
 
             }
+            
         }    
     } 
     

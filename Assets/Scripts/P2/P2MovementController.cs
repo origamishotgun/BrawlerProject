@@ -33,6 +33,8 @@ public class P2MovementController : MonoBehaviour
     public float damage;
     public float health;
     private float knockBackStr = 1;
+    //knockback
+    public Rigidbody2D enemyRB;
 
 
     private void Awake()
@@ -47,6 +49,8 @@ public class P2MovementController : MonoBehaviour
     {
         extraJumps = extraJumpsValue;
         rb = GetComponent<Rigidbody2D>();
+        //knockback
+        enemyRB = gameObject.GetComponent<Rigidbody2D>();
     }
     void Update()
     {
@@ -170,7 +174,7 @@ public class P2MovementController : MonoBehaviour
     {
 
         health += damage;
-        rb.velocity = Vector2.up * health * knockBackStr;
+        rb.velocity = new Vector2(moveInput * health * knockBackStr, health * knockBackStr);
 
         Debug.Log("damage taken !");
     }
