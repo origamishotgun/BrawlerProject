@@ -26,7 +26,9 @@ public class P2MovementController : MonoBehaviour
     public UnityEvent onLandEvent;
 
     //attack
-    private bool attack;
+    private bool attack1;
+    private bool attack2;
+    private bool attack3;
     public Transform attackPos;
     public float attackRange;
     public LayerMask whatIsEnemies;
@@ -72,7 +74,7 @@ public class P2MovementController : MonoBehaviour
 
         }
 
-        handleInput();
+        handleInput1();
 
     }
 
@@ -113,9 +115,7 @@ public class P2MovementController : MonoBehaviour
             }
         }
 
-        handleAttacks();
-
-        resetValues();
+        resetValues1();
 
     }
 
@@ -129,9 +129,14 @@ public class P2MovementController : MonoBehaviour
         transform.localScale = Scaler;
     }
 
-    private void handleAttacks()
+  
+    private void handleInput1()
     {
-        if (attack)
+        if (Input.GetButtonDown("Fire1_P2"))
+        {
+            attack1 = true;
+        }
+        if (attack1 == true)
         {
             animator.SetTrigger("Attack");
             rb.velocity = Vector2.zero;
@@ -146,20 +151,11 @@ public class P2MovementController : MonoBehaviour
     }
 
 
-    private void handleInput()
-    {
-        if (Input.GetButtonDown("Fire1_P2"))
-        {
-            attack = true;
-        }
-    }
-
-
-    private void resetValues()
+    private void resetValues1()
     {
         if (Input.GetButtonUp("Fire1_P2"))
         {
-            attack = false;
+            attack1 = false;
         }
     }
 

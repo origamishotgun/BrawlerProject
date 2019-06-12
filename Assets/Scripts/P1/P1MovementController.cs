@@ -26,9 +26,13 @@ public class P1MovementController : MonoBehaviour
     public UnityEvent onLandEvent;
 
     //attack
-    private bool attack;
+    private bool attack1;
+    private bool attack2;
+    private bool attack3;
     public Transform attackPos;
     public float attackRange;
+    public float attackRangeX;
+    public float attackRangeY;
     public LayerMask whatIsEnemies;
     public float damage;
     public float health;
@@ -69,8 +73,8 @@ public class P1MovementController : MonoBehaviour
 
         }
 
-        handleInput();
-
+        handleInput1();
+        handleInput2();
     }
 
     //Methods
@@ -110,9 +114,9 @@ public class P1MovementController : MonoBehaviour
                 }
             }
 
-        handleAttacks();
+        
 
-        resetValues();
+        resetValues1();
 
     }
 
@@ -126,49 +130,74 @@ public class P1MovementController : MonoBehaviour
         transform.localScale = Scaler;
     }
 
-    private void handleAttacks()
+    
+
+    private void handleInput1()
     {
-        if (attack)
+        if (Input.GetButtonDown("Fire1_P1"))
         {
-            animator.SetTrigger("Attack");
+            attack1 = true;            
+        }
+        if (attack1 == true)
+        {
+            animator.SetTrigger("Attack1");
             rb.velocity = Vector2.zero;
 
             Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<P2MovementController>().TakeDamage(damage);
-                
-               
+
+
 
 
             }
-            
-        }    
-    } 
-    
 
-    private void handleInput()
-    {
-        if (Input.GetButtonDown("Fire1_P1"))
-        {
-            attack = true;            
         }
     }
-    
 
-    private void resetValues()
+    private void handleInput2()
+    {
+        if (Input.GetButtonDown("Fire2_P1"))
+        {
+            attack2 = true;
+        }
+        if (attack2 == true)
+        {
+            animator.SetTrigger("Attack2");
+            rb.velocity = Vector2.zero;
+
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, new Vector2(attackRangeX, attackRangeY), 0, whatIsEnemies);
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<P2MovementController>().TakeDamage(damage);
+
+
+
+
+            }
+
+        }
+    }
+
+    private void resetValues1()
     {
         if (Input.GetButtonUp("Fire1_P1"))
         {
-            attack = false;
+            attack1 = false;
+        }
+        if(Input.GetButtonUp("Fire2_P1"))
+        {
+            attack2 = false;
         }
     }
+
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
-
+        Gizmos.DrawWireCube(attackPos.position, new Vector3(attackRangeX, attackRangeY, 1));
     }
 
     public void TakeDamage(float damage)
