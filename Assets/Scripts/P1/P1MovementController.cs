@@ -208,7 +208,4 @@ public class P1MovementController : MonoBehaviour
 
         Debug.Log("damage taken !");
     }
-
-
-
 }
