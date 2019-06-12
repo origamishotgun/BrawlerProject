@@ -35,8 +35,8 @@ public class P2MovementController : MonoBehaviour
     public float damage;
     public float health;
     private float knockBackStr = 1;
-    //knockback
-    public Rigidbody2D enemyRB;
+
+
 
 
     private void Awake()
@@ -51,8 +51,7 @@ public class P2MovementController : MonoBehaviour
     {
         extraJumps = extraJumpsValue;
         rb = GetComponent<Rigidbody2D>();
-        //knockback
-        enemyRB = gameObject.GetComponent<Rigidbody2D>();
+
     }
     void Update()
     {
@@ -124,12 +123,10 @@ public class P2MovementController : MonoBehaviour
     void Flip()
     {
         facingRight = !facingRight;
-        Vector3 Scaler = transform.localScale;
-        Scaler.x *= -1;
-        transform.localScale = Scaler;
+        transform.Rotate(0f, 180f, 0f);
     }
 
-  
+
     private void handleInput1()
     {
         if (Input.GetButtonDown("Fire1_P2"))
@@ -163,18 +160,18 @@ public class P2MovementController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
-
     }
 
     public void TakeDamage(float damage)
     {
-
         health += damage;
-        rb.velocity = new Vector2(moveInput * health * knockBackStr, health * knockBackStr);
-
+        rb.velocity = Vector2.up * health * knockBackStr;
         Debug.Log("damage taken !");
     }
 
-
-
+    public void TakeDamageBullet(float damage)
+    {
+        health += damage;
+        rb.velocity = Vector2.right * health * knockBackStr;
+    }
 }

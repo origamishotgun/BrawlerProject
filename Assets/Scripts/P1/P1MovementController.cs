@@ -51,6 +51,7 @@ public class P1MovementController : MonoBehaviour
     {
         extraJumps = extraJumpsValue;
         rb = GetComponent<Rigidbody2D>();
+
     }
     void Update()
     {
@@ -66,7 +67,7 @@ public class P1MovementController : MonoBehaviour
             animator.SetBool("isJumping", true);
         }
         else if (Input.GetButtonDown("Vertical_P1") && extraJumps == 0 && isGrounded == true)
-           
+
         {
             rb.velocity = Vector2.up * jumpForce;
 
@@ -75,6 +76,7 @@ public class P1MovementController : MonoBehaviour
 
         handleInput1();
         handleInput2();
+
     }
 
     //Methods
@@ -82,7 +84,7 @@ public class P1MovementController : MonoBehaviour
     {
 
         moveInput = Input.GetAxisRaw("Horizontal_P1");
-        
+
         if (!this.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
@@ -94,7 +96,7 @@ public class P1MovementController : MonoBehaviour
         {
             Flip();
         }
-        else if(facingRight == true && moveInput < 0)
+        else if (facingRight == true && moveInput < 0)
         {
             Flip();
         }
@@ -104,17 +106,17 @@ public class P1MovementController : MonoBehaviour
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, checkRadius, whatIsGround);
-            for (int i = 0; i < colliders.Length; i++)
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
             {
-                if (colliders[i].gameObject != gameObject)
-                {
-                    isGrounded = true;
-                    if (!wasGrounded)
-                        onLandEvent.Invoke();
-                }
+                isGrounded = true;
+                if (!wasGrounded)
+                    onLandEvent.Invoke();
             }
+        }
 
-        
+
 
         resetValues1();
 
@@ -125,21 +127,20 @@ public class P1MovementController : MonoBehaviour
     void Flip()
     {
         facingRight = !facingRight;
-        Vector3 Scaler = transform.localScale;
-        Scaler.x *= -1;
-        transform.localScale = Scaler;
+        transform.Rotate(0f, 180f, 0f);
     }
 
-    
+
 
     private void handleInput1()
     {
         if (Input.GetButtonDown("Fire1_P1"))
         {
-            attack1 = true;            
+            attack1 = true;
         }
         if (attack1 == true)
         {
+
             animator.SetTrigger("Attack1");
             rb.velocity = Vector2.zero;
 
@@ -147,11 +148,8 @@ public class P1MovementController : MonoBehaviour
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<P2MovementController>().TakeDamage(damage);
-
-
-
-
             }
+
 
         }
     }
@@ -170,11 +168,8 @@ public class P1MovementController : MonoBehaviour
             Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, new Vector2(attackRangeX, attackRangeY), 0, whatIsEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
+
                 enemiesToDamage[i].GetComponent<P2MovementController>().TakeDamage(damage);
-
-
-
-
             }
 
         }
@@ -186,7 +181,7 @@ public class P1MovementController : MonoBehaviour
         {
             attack1 = false;
         }
-        if(Input.GetButtonUp("Fire2_P1"))
+        if (Input.GetButtonUp("Fire2_P1"))
         {
             attack2 = false;
         }
@@ -202,10 +197,17 @@ public class P1MovementController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-
         health += damage;
         rb.velocity = Vector2.up * health * knockBackStr;
-
         Debug.Log("damage taken !");
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "ground_stalactite")
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }
